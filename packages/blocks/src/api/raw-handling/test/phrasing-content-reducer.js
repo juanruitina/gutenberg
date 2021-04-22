@@ -87,14 +87,4 @@ describe( 'phrasingContentReducer', () => {
 			deepFilterHTML( input, [ phrasingContentReducer ], {} )
 		).toEqual( output );
 	} );
-
-	it( 'should remove links with id but without href that are not footnotes nor endnotes', () => {
-		const input =
-			'<a id="#randomId">link with random id</a>, <a href="#ftn_1" id="_ftnref1">footnote link</a>';
-		const output =
-			'link with random id, <a href="#ftn_1" id="_ftnref1">footnote link</a>';
-		expect(
-			deepFilterHTML( input, [ phrasingContentReducer ], {} )
-		).toEqual( output );
-	} );
 } );

@@ -65,10 +65,10 @@ export default function phrasingContentReducer( node, doc ) {
 		// Remove name attribute in any case: the use of the name attribute in a elements is obsolete: https://html.spec.whatwg.org/multipage/obsolete.html#obsolete-but-conforming-features
 		node.removeAttribute( 'name' );
 
-		// Search for common footnote and endnote id structure (Word, LibreOffice). If doesn't match, remove id attribute.
+		// Keep ID only if there is an internal link for this ID.
 		if (
 			node.id &&
-			! /^_?(?:ftn|edn|sdfootnote|sdendnote)/i.test( node.id )
+			! node.ownerDocument.querySelector( `[href="#${ node.id }"]` )
 		) {
 			node.removeAttribute( 'id' );
 		}
